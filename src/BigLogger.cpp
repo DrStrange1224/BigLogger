@@ -22,6 +22,10 @@ biglg::BigLogger::BigLogger(std::string _name, std::string _path){
     TLS_DEBUG_MSG("Success BigLogger creating");
 }
 
+biglg::BigLogger::~BigLogger(){
+    out.close();
+}
+
 void biglg::BigLogger::custom_log(std::string tag, std::string msg){
     out << std::format("[{}] {}", tag, msg) << std::endl;
 }

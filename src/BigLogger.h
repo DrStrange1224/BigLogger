@@ -25,6 +25,8 @@ namespace biglg{
 
     public:
         BigLogger(std::string _name, std::string _path);
+        ~BigLogger();
+        
         void custom_log(std::string tag, std::string msg);
         void info(std::string msg);
         void warn(std::string msg);
