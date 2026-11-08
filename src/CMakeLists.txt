@@ -8,3 +8,8 @@ target_sources(BigLogger
         FILES
             BigLogger.h
 )
+
+add_subdirectory(debug)
+if(CMAKE_BUILD_TYPE MATCHES "Debug")
+    target_link_libraries(BigLogger PUBLIC DebugTools)
+endif()

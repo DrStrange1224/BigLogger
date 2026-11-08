@@ -6,8 +6,8 @@
 #include <iostream>
 #include <fstream>
 
-#ifdef LOGGER_TEST_ENABLED
-#  include <testTools.h>
+#if CMAKE_BUILD_TYPE == Debug
+#  include <debugTools.h>
 #  define TLS_DEBUG_MSG(msg) tls::debug_msg(msg)
 #  define TLS_DEBUG_ERR(msg, err) tls::debug_err(msg, err)
 #else
