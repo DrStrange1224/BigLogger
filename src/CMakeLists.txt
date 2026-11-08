@@ -1,5 +1,5 @@
-add_library(BigLoggerLib)
-target_sources(BigLoggerLib
+add_library(BigLogger)
+target_sources(BigLogger
     PRIVATE
         BigLogger.cpp
     
