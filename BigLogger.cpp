@@ -2,12 +2,18 @@
 
 biglg::BigLogger::BigLogger(std::string _name, std::string _path){
     name = _name;
-    auto p = std::filesystem::current_path();
-    p /= _path;
-    if (std::filesystem::exists(p)){
-        std::cout << p << std::endl;
-        path = _path;
-    }else{
-        std::cerr << "No path exists like: " << p << std::endl;
+    path = std::filesystem::current_path() / _path;
+
+    //if file already exists just use it
+    if (std::filesystem::exists(path)){
+        
+    }
+    //else try to create it
+    else{
+        std::error_code err;
+        if (std::filesystem::create_directories(path.parent_path(), err)){
+            
+        }
+        std::ofstream _(path);
     }
 }
