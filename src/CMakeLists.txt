@@ -9,7 +9,7 @@ target_sources(BigLogger
             BigLogger.h
 )
 
-add_subdirectory(debug)
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
+    add_subdirectory(debug)
     target_link_libraries(BigLogger PUBLIC DebugTools)
 endif()
