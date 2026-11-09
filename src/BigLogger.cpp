@@ -1,26 +1,28 @@
 #include <BigLogger.h>
 
-std::error_code biglg::BigLogger::check_path(std::filesystem::path path){
+bool biglg::BigLogger::check_path(std::filesystem::path path){
     TLS_DEBUG_MSG(std::format("START: Checking if path exists: {}", path));
 
-    std::error_code ec;
     if (std::filesystem::exists(path)){
         TLS_DEBUG_MSG("File already exists");
     }
     else{
         TLS_DEBUG_MSG("Directories don't exist");
+        std::error_code ec;
         if (std::filesystem::create_directories(path.parent_path(), ec)){
             TLS_DEBUG_MSG("Directory created");
         }else{
             TLS_DEBUG_MSG("Directory NOT created");
         }
         if (ec){
-            TLS_DEBUG_ERR("Error while creating directory!", ec);
+            auto er = std::system_error(ec);
+            TLS_DEBUG_ERR("Error while creating directory!", er);
+            throw er;
         }
     }
 
     TLS_DEBUG_MSG(std::format("SUCCESS: Checking if path exists: {}", path));
-    return ec;
+    return true;
 }
 
 biglg::BigLogger::BigLogger(std::string name, std::string path)
@@ -96,7 +98,7 @@ void biglg::BigLogger::set_name(std::string name){
         if (std::isspace(name[i])) name.erase(i, 1);
     }
     if (name.empty()){
-        // TLS_DEBUG_ERR("Logger empty", )
+        TLS_DEBUG_ERR("Logger empty", std::runtime_error("Logger name empty or contains only whitespaces"));
         throw new std::runtime_error("Logger name can't be empty");
     }
     this->name = name;

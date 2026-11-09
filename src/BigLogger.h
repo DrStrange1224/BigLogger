@@ -9,10 +9,10 @@
 #if CMAKE_BUILD_TYPE == Debug
 #  include <debugTools.h>
 #  define TLS_DEBUG_MSG(msg) tls::debug_msg(msg)
-#  define TLS_DEBUG_ERR(msg, err) tls::debug_err(msg, err)
+#  define TLS_DEBUG_ERR(msg, exc) tls::debug_err(msg, exc)
 #else
 #  define TLS_DEBUG_MSG(msg) ((void)0)
-#  define TLS_DEBUG_ERR(msg, err) ((void)0)
+#  define TLS_DEBUG_ERR(msg, exc) ((void)0)
 #endif
 
 namespace biglg{
@@ -25,7 +25,7 @@ namespace biglg{
         std::filesystem::path path;
         std::ofstream out;
 
-        std::error_code check_path(std::filesystem::path path);
+        bool check_path(std::filesystem::path path);
 
     public:
         BigLogger(std::string _name, std::string _path);
