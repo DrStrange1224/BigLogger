@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 
 namespace tls{
     void debug_msg(std::string msg);
