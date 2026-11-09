@@ -7,6 +7,7 @@ target_sources(BigLogger
         FILE_SET HEADERS
         FILES
             BigLogger.h
+            Exceptions.h
 )
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
