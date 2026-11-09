@@ -1,10 +1,10 @@
 add_library(DebugTools)
 target_sources(DebugTools
     PRIVATE
-        debugTools.cpp
+        DebugTools.cpp
 
     PUBLIC
         FILE_SET HEADERS
         FILES
-            debugTools.h
+            DebugTools.h
 )
