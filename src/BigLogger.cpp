@@ -18,7 +18,7 @@ std::error_code biglg::BigLogger::check_path(std::filesystem::path path){
 
 biglg::BigLogger::BigLogger(std::string name, std::string path)
 {
-    this->name = name;
+    set_name(name);
     set_path(std::filesystem::current_path() / path);
     
     out = std::ofstream(path);
@@ -61,4 +61,18 @@ void biglg::BigLogger::set_path(std::filesystem::path path){
 
     out.close();
     out = std::ofstream(path);
+}
+
+std::string biglg::BigLogger::get_name(){
+    return name;
+}
+
+void biglg::BigLogger::set_name(std::string name){
+    for (int i = name.length() - 1; i >= 0; i--){
+        if (std::isspace(name[i])) name.erase(i, 1);
+    }
+    if (name.empty()){
+        throw new std::runtime_error("Logger name can't be empty");
+    }
+    this->name = name;
 }

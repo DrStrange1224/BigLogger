@@ -41,6 +41,10 @@ namespace biglg{
         std::filesystem::path get_path();
         void set_path(std::string path);
         void set_path(std::filesystem::path path);
+
+        //get-set name
+        std::string get_name();
+        void set_name(std::string name);
     };
 
 }
