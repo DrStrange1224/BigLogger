@@ -1,4 +1,4 @@
-add_library(BigLogger)
+add_library(BigLogger SHARED)
 target_sources(BigLogger
     PRIVATE
         BigLogger.cpp
