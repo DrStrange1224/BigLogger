@@ -12,7 +12,8 @@ bool biglg::BigLogger::check_path(std::filesystem::path path){
         if (std::filesystem::create_directories(path.parent_path(), ec)){
             TLS_DEBUG_MSG("Directory created");
         }else{
-            TLS_DEBUG_MSG("Directory NOT created");
+            TLS_DEBUG_MSG("CORRUPT: Directory NOT created");
+            return false;
         }
         if (ec){
             auto er = std::system_error(ec);
@@ -75,13 +76,12 @@ void biglg::BigLogger::set_path(std::string path){
 void biglg::BigLogger::set_path(std::filesystem::path path){
     TLS_DEBUG_MSG(std::format("START: Setting path: {}", path));
 
-    auto ec = check_path(path);
-    if (ec){
-        std::cerr << "ERROR" << std::endl;
+    if (!check_path(path)){
+        out.close();
+        out = std::ofstream(path);
+    }else{
+        TLS_DEBUG_MSG("CORRUPT: Couldn't set new path");
     }
-
-    out.close();
-    out = std::ofstream(path);
 
     TLS_DEBUG_MSG(std::format("SUCCESS: Setting path: {}", path));
 }
