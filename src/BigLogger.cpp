@@ -1,23 +1,26 @@
 #include <BigLogger.h>
 
-biglg::BigLogger::BigLogger(std::string _name, std::string _path){
-    name = _name;
-    path = std::filesystem::current_path() / _path;
-
-    //if file already exists just use it
+std::error_code biglg::BigLogger::check_path(std::filesystem::path path){
+    std::error_code ec;
     if (std::filesystem::exists(path)){
         TLS_DEBUG_MSG("File already exists");
     }
-    //else try to create it
     else{
-        std::error_code err;
-        if (std::filesystem::create_directories(path.parent_path(), err)){
+        if (std::filesystem::create_directories(path.parent_path(), ec)){
             TLS_DEBUG_MSG("Directory created!");
         }
-        if (err){
-            TLS_DEBUG_ERR("Error while creating directory!", err);
+        if (ec){
+            TLS_DEBUG_ERR("Error while creating directory!", ec);
         }
     }
+    return ec;
+}
+
+biglg::BigLogger::BigLogger(std::string name, std::string path)
+{
+    this->name = name;
+    set_path(std::filesystem::current_path() / path);
+    
     out = std::ofstream(path);
     TLS_DEBUG_MSG("Success BigLogger creating");
 }
@@ -40,4 +43,22 @@ void biglg::BigLogger::warn(std::string msg){
 
 void biglg::BigLogger::err(std::string msg){
     custom_log("ERR", msg);
+}
+
+std::filesystem::path biglg::BigLogger::get_path(){
+    return path;
+}
+
+void biglg::BigLogger::set_path(std::string path){
+    set_path(std::filesystem::path(path));
+}
+
+void biglg::BigLogger::set_path(std::filesystem::path path){
+    auto ec = check_path(path);
+    if (ec){
+        std::cerr << "ERROR" << std::endl;
+    }
+
+    out.close();
+    out = std::ofstream(path);
 }

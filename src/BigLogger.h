@@ -19,18 +19,28 @@ namespace biglg{
 
     class BigLogger{
     private:
+
+        //TODO do i need logger name???
         std::string name;
         std::filesystem::path path;
         std::ofstream out;
+
+        std::error_code check_path(std::filesystem::path path);
 
     public:
         BigLogger(std::string _name, std::string _path);
         ~BigLogger();
         
+        //simple logs
         void custom_log(std::string tag, std::string msg);
         void info(std::string msg);
         void warn(std::string msg);
         void err(std::string msg);
+
+        //get-set path
+        std::filesystem::path get_path();
+        void set_path(std::string path);
+        void set_path(std::filesystem::path path);
     };
 
 }
