@@ -1,4 +1,4 @@
-add_library(DebugTools SHARED)
+add_library(DebugTools)
 target_sources(DebugTools
     PRIVATE
         DebugTools.cpp
