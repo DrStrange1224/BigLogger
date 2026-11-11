@@ -6,7 +6,7 @@
 #include <iostream>
 #include <fstream>
 
-#if CMAKE_BUILD_TYPE == Debug
+#ifdef CMAKE_BUILD_TYPE
 #  include <DebugTools.h>
 #  define TLS_DEBUG_MSG(msg) tls::debug_msg(msg)
 #  define TLS_DEBUG_ERR(msg, exc) tls::debug_err(msg, exc)

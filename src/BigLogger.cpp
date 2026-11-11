@@ -1,7 +1,7 @@
 #include <BigLogger.h>
 
 bool biglg::BigLogger::check_path(std::filesystem::path path){
-    TLS_DEBUG_MSG(std::format("START: Checking if path exists: {}", path));
+    TLS_DEBUG_MSG(std::format("START: Checking if path exists: {}", path.string()));
 
     if (std::filesystem::exists(path)){
         TLS_DEBUG_MSG("File already exists");
@@ -22,7 +22,7 @@ bool biglg::BigLogger::check_path(std::filesystem::path path){
         }
     }
 
-    TLS_DEBUG_MSG(std::format("SUCCESS: Checking if path exists: {}", path));
+    TLS_DEBUG_MSG(std::format("SUCCESS: Checking if path exists: {}", path.string()));
     return true;
 }
 
@@ -74,7 +74,7 @@ void biglg::BigLogger::set_path(std::string path){
 }
 
 void biglg::BigLogger::set_path(std::filesystem::path path){
-    TLS_DEBUG_MSG(std::format("START: Setting path: {}", path));
+    TLS_DEBUG_MSG(std::format("START: Setting path: {}", path.string()));
 
     if (!check_path(path)){
         out.close();
@@ -83,7 +83,7 @@ void biglg::BigLogger::set_path(std::filesystem::path path){
         TLS_DEBUG_MSG("CORRUPT: Couldn't set new path");
     }
 
-    TLS_DEBUG_MSG(std::format("SUCCESS: Setting path: {}", path));
+    TLS_DEBUG_MSG(std::format("SUCCESS: Setting path: {}", path.string()));
 }
 
 std::string biglg::BigLogger::get_name(){

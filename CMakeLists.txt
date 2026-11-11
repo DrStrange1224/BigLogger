@@ -3,9 +3,12 @@ cmake_minimum_required(VERSION 4.4)
 project(BigLogger)
 
 option(BUILD_TESTING "Enable testing and build tests" ON)
+option(CMAKE_BUILD_TYPE "Debug/Release" OFF)
 
 add_subdirectory(src)
-target_compile_definitions(BigLogger PUBLIC CMAKE_BUILD_TYPE)
+if(CMAKE_BUILD_TYPE)
+    target_compile_definitions(BigLogger PUBLIC CMAKE_BUILD_TYPE)
+endif()
 
 if(BUILD_TESTING)
     enable_testing()
