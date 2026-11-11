@@ -2,10 +2,16 @@
     "version": 8,
     "testPresets": [
         {
-            "name": "Default",
-            "displayName": "Default test preset",
+            "name": "Debug",
+            "displayName": "Debug test preset",
             "description": "Sets Ninja generator, build and install directory",
             "configurePreset": "Debug"
+        },
+        {
+            "name": "Release",
+            "displayName": "Release test preset",
+            "description": "Sets Ninja generator, build and install directory",
+            "configurePreset": "Release"
         }
     ],
     "configurePresets": [
