@@ -43,7 +43,7 @@ cmake --install .\build\Debug
 
 Configuring + Building:
 ```bash
-cmake --workflow --preset Debug
+cmake --workflow --preset Release
 ```
 
 Configuring CMake:
